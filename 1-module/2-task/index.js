@@ -11,7 +11,7 @@ function print(text) {
  */
 function isValid(name) {
   if (name === null) return false;
-  if (name.length < 4 ) return false;
+  if (name.length < 4) return false;
   for (let i = 1; i <= (name.length - 1); i++) {
     if (name[i] === ' ') return false
   };
