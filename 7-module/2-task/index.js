@@ -1,7 +1,7 @@
 import createElement from '../../assets/lib/create-element.js';
 
 export default class Modal {
-  constructor() {   
+  constructor() {
     this.modalWindow = createElement(`
     <div class="modal">
     <!--Прозрачная подложка перекрывающая интерфейс-->
@@ -14,9 +14,7 @@ export default class Modal {
           <img src="/assets/images/icons/cross-icon.svg" alt="close-icon" />
         </button>
 
-        <h3 class="modal__title">
-          
-        </h3>
+        <h3 class="modal__title"></h3>
       </div>
 
       <div class="modal__body">

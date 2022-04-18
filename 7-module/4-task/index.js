@@ -66,24 +66,24 @@ export default class StepSlider {
 
       function onMouseMove(event) {  
         event.preventDefault();      
-        let newLeft = event.clientX - shiftX - slider.getBoundingClientRect().left;
+        let newLeft = (event.clientX - slider.getBoundingClientRect().left) / slider.offsetWidth;
         const sliderWidth = slider.getBoundingClientRect().width;
         
         if (newLeft < 0) {
           newLeft = 0;
         }
-        let rightEdge = slider.offsetWidth - thumb.offsetWidth + thumb.getBoundingClientRect().width;
-        if (newLeft > rightEdge) {
-          newLeft = rightEdge;
+        
+        if (newLeft > 1) {
+          newLeft = 1;
         }  
                 
-        value = Math.round(newLeft / (sliderWidth / (steps - 1)));  
+        value = Math.round(newLeft * (steps - 1));
         slider.querySelector('.slider__step-active').classList = '';
         spansList[value].classList.add("slider__step-active");
         slider.querySelector(".slider__value").innerHTML = value;        
-        sliderProgress.style.width = `${newLeft / sliderWidth * 100}%`;        
+        sliderProgress.style.width = newLeft * 100 + '%';     
 
-        thumb.style.left = `${newLeft / sliderWidth * 100}%`;
+        thumb.style.left = newLeft * 100 + '%';
       }
 
       function onMouseUp() {
