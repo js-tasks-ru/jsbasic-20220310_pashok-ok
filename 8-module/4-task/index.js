@@ -31,15 +31,14 @@ export default class Cart {
         this.cartItems.push(cartItem);      
       }      
       
-      this.onProductUpdate(this.cartItems);            
+      this.onProductUpdate(this.cartItems);                  
     }    
   }
 
   cartSearch(name) {
     for (let i = 0; i < this.cartItems.length; i++) {
       if (this.cartItems[i].product.id == name) {
-        this.curId = i;
-        
+        this.curId = i;        
       }
     }
     return this.cartItems[this.curId];

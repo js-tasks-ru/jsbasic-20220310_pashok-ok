@@ -34,31 +34,42 @@ export default class ProductGrid {
     </div>`);
 
     this.productGrid = productGrid;
+
+    this.productGrid.addEventListener('click', event =>{
+      if (event.target.closest('BUTTON')) {        
+        const name = event.target.parentElement.parentElement.querySelector('.card__title').innerText;        
+        const pressEvent = new CustomEvent("product-add", { 
+          detail: name, // Уникальный идентификатора товара из объекта товара
+          bubbles: true // это событие всплывает - это понадобится в дальнейшем
+        });
+        event.target.dispatchEvent(pressEvent);      
+      }           
+    });
+
     return this.productGrid;
   }
 
-  updateFilter(filter) {
+  updateFilter(filter) {    
     let productCardsFiltered = [];
     
     for (let key in filter) {
       this.filters[key] = filter[key];
-    }    
+    }  
 
     this.products.forEach(element => 
     {
       let noNut = (this.filters["noNuts"] === true && element["nuts"] != true) || this.filters["noNuts"] === false;
-      let vegetarian = element["vegeterian"] == this.filters["vegeterianOnly"] == true || this.filters["vegeterianOnly"] === false;  
-            
+      let vegetarian = element["vegeterian"] == this.filters["vegeterianOnly"] == true || this.filters["vegeterianOnly"] === false; 
       if (noNut && vegetarian &&
         element["spiciness"] <= this.filters["maxSpiciness"] &&
-        (element["category"] == this.filters["category"] || this.filters["category"] == '')
+        (element["category"] == this.filters["category"] || this.filters["category"] == '' )
       ) 
       {          
         productCardsFiltered.push(element);                  
-      }});              
-      
-    document.querySelector(".products-grid__inner").remove();
+      }});   
+    
+    document.querySelector(".products-grid__inner").remove();    
     document.querySelector('.products-grid').append(this.render(productCardsFiltered).querySelector('.products-grid__inner'));
-  
+
   }
 }

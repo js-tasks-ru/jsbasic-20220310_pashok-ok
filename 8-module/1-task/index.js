@@ -22,7 +22,7 @@ export default class CartIcon {
         </div>`;
         
 
-      this.initialTopCoord = this.elem.getBoundingClientRect().top + window.pageYOffset;
+      this.initialTopCoord = this.elem.getBoundingClientRect().top;
 
       this.updatePosition();
 

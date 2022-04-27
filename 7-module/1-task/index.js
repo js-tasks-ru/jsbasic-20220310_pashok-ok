@@ -4,6 +4,7 @@ export default class RibbonMenu {
   constructor(categories) {
     this.categories = categories;
     this.elem = this.render();
+    this.value = '';
   }
 
   render() {
@@ -65,7 +66,8 @@ export default class RibbonMenu {
         event.preventDefault();
         ribbonMenu.querySelector('.ribbon__item_active').classList.remove('ribbon__item_active');
         event.target.classList.add('ribbon__item_active');  
-        const category = event.target.dataset;                            
+        const category = event.target.dataset;
+        this.value = category.id;                            
         const pressEvent = new CustomEvent('ribbon-select', { // имя события должно быть именно 'ribbon-select'
           detail: category.id, // уникальный идентификатора категории из её объекта
           bubbles: true // это событие всплывает - это понадобится в дальнейшем

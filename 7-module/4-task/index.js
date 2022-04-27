@@ -4,6 +4,7 @@ export default class StepSlider {
   constructor({ steps, value = 0 }) {
     this.elem = this.render(steps, value);
     this.steps = steps;
+    this.value = value;
   }
 
   render(steps, value) {
@@ -33,6 +34,7 @@ export default class StepSlider {
     const thumb = slider.querySelector('.slider__thumb');
     
     sliderProgress.style.width = `${(value / (steps - 1)) * 100}%`;
+    thumb.style.left = `${value / (steps - 1) * 100}%`;
            
     slider.addEventListener('click', event =>{       
       
